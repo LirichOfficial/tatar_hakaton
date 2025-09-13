@@ -553,6 +553,15 @@ def scene9() -> Scene:
         texture_path="sprites/objects/grandpa.png",
         z=1,
     )
+    ebi = StaticObject(
+        id="ebi",
+        name="Әби",
+        rect=Rect(158, 208, 194, 264),
+        solid=False,
+        interactable=False,
+        texture_path="sprites/objects/grandma.png",
+        z=1,
+    )
     door = StaticObject(
         id="door",
         rect=Rect(85, 35, 220, 160),
@@ -562,9 +571,26 @@ def scene9() -> Scene:
         texture_path="sprites/bahtiyar/down0.png",
         z=1,
     )
+    well = StaticObject(
+        id="well",
+        rect=Rect(40, 160, 100, 240),
+        solid=False,
+        interactable=False,
+        texture_path="sprites/bahtiyar/down0.png",
+        z=1,
+    )
+    bucket = StaticObject(
+        id="bucket",
+        name="Су",
+        rect=Rect(60, 200, 92, 232),
+        solid=False,
+        interactable=False,
+        texture_path="sprites/bahtiyar/down0.png",
+        z=2,
+    )
     return Scene(
         id="scene9",
-        objects=[background, house1, house2, door, babay],
+        objects=[background, house1, house2, door, babay, ebi, well, bucket],
         player_pos=(230, 220),
         player_size=(35, 35),
         interact_distance=28.0,
@@ -626,14 +652,15 @@ def scene11() -> Scene:
         id="door_exit",
         rect=Rect(80, 200, 120, 260),
         solid=False,
-        interactable=False,
+        interactable=True,
+        next_scene_factory=scene9,
         texture_path=None,
         z=-1,
     )
     book = StaticObject(
         id="book",
         name="Китап",
-        rect=Rect(240, 180, 272, 212),
+        rect=Rect(60, 180, 92, 212),
         solid=False,
         interactable=True,
         next_scene_factory=scene12,
@@ -649,9 +676,17 @@ def scene11() -> Scene:
         texture_path="sprites/objects/grandma.png",
         z=1,
     )
+    samovar = StaticObject(
+        id="samovar",
+        rect=Rect(360, 200, 392, 232),
+        solid=False,
+        interactable=False,
+        texture_path="sprites/bahtiyar/down0.png",
+        z=1,
+    )
     return Scene(
         id="scene11",
-        objects=[background, door_exit, book, ebi],
+        objects=[background, door_exit, book, ebi, samovar],
         player_pos=(230, 220),
         player_size=(70, 70),
         interact_distance=28.0,
@@ -713,9 +748,18 @@ def scene13() -> Scene:
         id="door_exit",
         rect=Rect(80, 200, 120, 260),
         solid=False,
-        interactable=False,
+        interactable=True,
+        next_scene_factory=scene15,
         texture_path=None,
         z=-1,
+    )
+    book = StaticObject(
+        id="book",
+        rect=Rect(60, 180, 92, 212),
+        solid=False,
+        interactable=False,
+        texture_path="sprites/bahtiyar/down0.png",
+        z=1,
     )
     ebi = StaticObject(
         id="ebi",
@@ -727,9 +771,17 @@ def scene13() -> Scene:
         texture_path="sprites/objects/grandma_highlited.png",
         z=1,
     )
+    samovar = StaticObject(
+        id="samovar",
+        rect=Rect(360, 200, 392, 232),
+        solid=False,
+        interactable=False,
+        texture_path="sprites/bahtiyar/down0.png",
+        z=1,
+    )
     return Scene(
         id="scene13",
-        objects=[background, door_exit, ebi],
+        objects=[background, door_exit, book, ebi, samovar],
         player_pos=(230, 220),
         player_size=(70, 70),
         interact_distance=28.0,
@@ -761,7 +813,7 @@ def scene14() -> Scene:
         persist_progress=True,
         texture_path="sprites/objects/grandma.png",
         z=1,
-        next_scene_factory=scene15,
+        next_scene_factory=scene13,
     )
     scene = Scene(
         id="scene14",
@@ -776,7 +828,7 @@ def scene14() -> Scene:
 
 
 def scene15() -> Scene:
-    """Yard scene with highlighted bucket at the well."""
+    """Yard scene with bucket at the well."""
     background = StaticObject(
         id="bg",
         rect=Rect(0, 0, 496, 279),
@@ -786,9 +838,25 @@ def scene15() -> Scene:
         z=0,
         scale_texture_to_rect=True,
     )
+    house1 = StaticObject(
+        id="house1",
+        rect=Rect(85, 35, 220, 160),
+        solid=False,
+        interactable=False,
+        texture_path="sprites/objects/house1.png",
+        z=1,
+    )
+    house2 = StaticObject(
+        id="house2",
+        rect=Rect(330, 110, 475, 240),
+        solid=False,
+        interactable=False,
+        texture_path="sprites/objects/house2.png",
+        z=1,
+    )
     well = StaticObject(
         id="well",
-        rect=Rect(200, 160, 260, 240),
+        rect=Rect(40, 160, 100, 240),
         solid=False,
         interactable=False,
         texture_path="sprites/bahtiyar/down0.png",
@@ -797,7 +865,7 @@ def scene15() -> Scene:
     bucket = StaticObject(
         id="bucket",
         name="Су",
-        rect=Rect(220, 200, 252, 232),
+        rect=Rect(60, 200, 92, 232),
         solid=False,
         interactable=True,
         next_scene_factory=scene16,
@@ -812,9 +880,18 @@ def scene15() -> Scene:
         texture_path="sprites/objects/grandpa.png",
         z=1,
     )
+    door = StaticObject(
+        id="door",
+        rect=Rect(85, 35, 220, 160),
+        solid=False,
+        interactable=True,
+        next_scene_factory=scene17,
+        texture_path="sprites/bahtiyar/down0.png",
+        z=1,
+    )
     return Scene(
         id="scene15",
-        objects=[background, well, bucket, babay],
+        objects=[background, house1, house2, door, well, bucket, babay],
         player_pos=(230, 220),
         player_size=(35, 35),
         interact_distance=28.0,
@@ -847,7 +924,7 @@ def scene16() -> Scene:
         texture_path="sprites/bahtiyar/down0.png",
         z=1,
         reward=("су", "sprites/bahtiyar/down0.png"),
-        next_scene_factory=scene17,
+        next_scene_factory=scene15,
     )
     scene = Scene(
         id="scene16",
@@ -872,6 +949,23 @@ def scene17() -> Scene:
         z=0,
         scale_texture_to_rect=True,
     )
+    door_exit = StaticObject(
+        id="door_exit",
+        rect=Rect(80, 200, 120, 260),
+        solid=False,
+        interactable=True,
+        next_scene_factory=scene15,
+        texture_path=None,
+        z=-1,
+    )
+    book = StaticObject(
+        id="book",
+        rect=Rect(60, 180, 92, 212),
+        solid=False,
+        interactable=False,
+        texture_path="sprites/bahtiyar/down0.png",
+        z=1,
+    )
     bucket = StaticObject(
         id="bucket",
         rect=Rect(240, 180, 272, 212),
@@ -890,9 +984,17 @@ def scene17() -> Scene:
         texture_path="sprites/objects/grandma_highlited.png",
         z=1,
     )
+    samovar = StaticObject(
+        id="samovar",
+        rect=Rect(360, 200, 392, 232),
+        solid=False,
+        interactable=False,
+        texture_path="sprites/bahtiyar/down0.png",
+        z=1,
+    )
     return Scene(
         id="scene17",
-        objects=[background, bucket, ebi],
+        objects=[background, door_exit, book, bucket, ebi, samovar],
         player_pos=(230, 220),
         player_size=(70, 70),
         interact_distance=28.0,
@@ -915,7 +1017,7 @@ def scene18() -> Scene:
     )
     samovar = StaticObject(
         id="samovar",
-        rect=Rect(240, 180, 272, 212),
+        rect=Rect(360, 200, 392, 232),
         solid=False,
         interactable=False,
         texture_path="sprites/bahtiyar/down0.png",
@@ -932,6 +1034,7 @@ def scene18() -> Scene:
         persist_progress=True,
         texture_path="sprites/objects/grandma.png",
         z=1,
+        next_scene_factory=scene17,
     )
     scene = Scene(
         id="scene18",
