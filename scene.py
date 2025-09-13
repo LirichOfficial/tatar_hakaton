@@ -116,6 +116,7 @@ class NPC(GameObject):
     _dialog_index: int = 0
     repeatable: bool = False
     persist_progress: bool = True
+    reward: Optional[Tuple[str, str]] = None
 
     def has_dialog(self) -> bool:
         return len(self.dialog_lines) > 0
@@ -133,9 +134,14 @@ class NPC(GameObject):
             return line
         return None
 
-    def on_dialog_finished(self) -> None:
+    def on_dialog_finished(self, scene: "Scene") -> None:
         if not self.repeatable:
             self.interactable = False
+        if self.reward:
+            # Добавляем слово в словарь игрока и сбрасываем награду,
+            # чтобы не добавлять его повторно при повторных диалогах.
+            scene.add_element(self.reward)
+            self.reward = None
 
     def on_interact(self, scene: "Scene") -> Optional["Scene"]:
         if self.is_dialog_finished() and self.next_scene_factory:
@@ -211,7 +217,8 @@ class Scene:
             return
         obj, dist = self._nearest_interactable()
         if obj and dist <= self.interact_distance:
-            self.text_window.show_hint("Нажмите E, чтобы взаимодействовать", obj.id)
+            # Подсказка на татарском языке
+            self.text_window.show_hint("E басып, эш итегез", obj.id)
         else:
             if self.text_window.mode == "hint":
                 self.text_window.hide()
@@ -295,7 +302,7 @@ class Scene:
         if line is not None:
             self.text_window.show_dialog(line, npc.id)
             return None
-        npc.on_dialog_finished()
+        npc.on_dialog_finished(self)
         self._active_dialog_npc_id = None
         self.text_window.hide()
         return npc.on_interact(self)
@@ -323,7 +330,10 @@ class Scene:
     def add_element(self, element: Tuple[str, str]) -> None:
         """Добавить элемент (слово, путь к картинке) в инвентарь."""
         word, path = element
-        add_inventory_item(word, path)
+        # Не добавляем слово, если оно уже есть в словаре
+        inventory = load_inventory()
+        if word not in [item["word"] for item in inventory]:
+            add_inventory_item(word, path)
 
     def toggle_inventory(self) -> None:
         """Открыть/закрыть инвентарь. Нельзя открыть во время диалога."""
