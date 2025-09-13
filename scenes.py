@@ -125,10 +125,26 @@ def scene1() -> Scene:
         texture_path="sprites/objects/flower.png",
         z=1,
     )
+    well = StaticObject(
+        id="well",
+        rect=Rect(40, 160, 100, 240),
+        solid=False,
+        interactable=False,
+        texture_path="sprites/bahtiyar/down0.png",
+        z=1,
+    )
+    bucket = StaticObject(
+        id="bucket",
+        rect=Rect(392, 212, 424, 244),
+        solid=False,
+        interactable=False,
+        texture_path="sprites/bahtiyar/down0.png",
+        z=2,
+    )
     return Scene(
         id="scene1",
-        objects=[background, house1, house2, door, babay, flower],
-        player_pos=(230, 220),
+        objects=[background, house1, house2, door, babay, flower, well, bucket],
+        player_pos=(150, 220),
         player_size=(35, 35),
         interact_distance=28.0,
         player_texture_path="sprites/bahtiyar/down0.png",
@@ -172,6 +188,22 @@ def scene2() -> Scene:
         texture_path="sprites/objects/flower.png",
         z=1,
     )
+    well = StaticObject(
+        id="well",
+        rect=Rect(40, 160, 100, 240),
+        solid=False,
+        interactable=False,
+        texture_path="sprites/bahtiyar/down0.png",
+        z=1,
+    )
+    bucket = StaticObject(
+        id="bucket",
+        rect=Rect(392, 212, 424, 244),
+        solid=False,
+        interactable=False,
+        texture_path="sprites/bahtiyar/down0.png",
+        z=2,
+    )
     babay_big = NPC(
         id="babay_big",
         name="Бабай",
@@ -188,7 +220,7 @@ def scene2() -> Scene:
     )
     scene = Scene(
         id="scene2",
-        objects=[background, house1, house2, flower, babay_big],
+        objects=[background, house1, house2, flower, well, bucket, babay_big],
         player_pos=(-100, -100),
         player_size=(35, 35),
         player_texture_path="sprites/bahtiyar/down0.png",
@@ -250,10 +282,26 @@ def scene3() -> Scene:
         texture_path="sprites/objects/flower.png",
         z=1,
     )
+    well = StaticObject(
+        id="well",
+        rect=Rect(40, 160, 100, 240),
+        solid=False,
+        interactable=False,
+        texture_path="sprites/bahtiyar/down0.png",
+        z=1,
+    )
+    bucket = StaticObject(
+        id="bucket",
+        rect=Rect(392, 212, 424, 244),
+        solid=False,
+        interactable=False,
+        texture_path="sprites/bahtiyar/down0.png",
+        z=2,
+    )
     return Scene(
         id="scene3",
-        objects=[background, house1, house2, door, babay, flower],
-        player_pos=(230, 220),
+        objects=[background, house1, house2, door, babay, flower, well, bucket],
+        player_pos=(150, 220),
         player_size=(35, 35),
         interact_distance=28.0,
         player_texture_path="sprites/bahtiyar/down0.png",
@@ -353,10 +401,26 @@ def scene5() -> Scene:
         texture_path="sprites/objects/flower_highlited.png",
         z=1,
     )
+    well = StaticObject(
+        id="well",
+        rect=Rect(40, 160, 100, 240),
+        solid=False,
+        interactable=False,
+        texture_path="sprites/bahtiyar/down0.png",
+        z=1,
+    )
+    bucket = StaticObject(
+        id="bucket",
+        rect=Rect(392, 212, 424, 244),
+        solid=False,
+        interactable=False,
+        texture_path="sprites/bahtiyar/down0.png",
+        z=2,
+    )
     return Scene(
         id="scene5",
-        objects=[background, house1, house2, door, babay, flower],
-        player_pos=(230, 220),
+        objects=[background, house1, house2, door, babay, flower, well, bucket],
+        player_pos=(150, 220),
         player_size=(35, 35),
         interact_distance=28.0,
         player_texture_path="sprites/bahtiyar/down0.png",
@@ -400,6 +464,22 @@ def scene6() -> Scene:
         texture_path="sprites/objects/grandpa.png",
         z=1,
     )
+    well = StaticObject(
+        id="well",
+        rect=Rect(40, 160, 100, 240),
+        solid=False,
+        interactable=False,
+        texture_path="sprites/bahtiyar/down0.png",
+        z=1,
+    )
+    bucket = StaticObject(
+        id="bucket",
+        rect=Rect(392, 212, 424, 244),
+        solid=False,
+        interactable=False,
+        texture_path="sprites/bahtiyar/down0.png",
+        z=2,
+    )
     flower_big = NPC(
         id="flower_big",
         name="Чәчәк",
@@ -416,7 +496,7 @@ def scene6() -> Scene:
     )
     scene = Scene(
         id="scene6",
-        objects=[background, house1, house2, babay, flower_big],
+        objects=[background, house1, house2, babay, well, bucket, flower_big],
         player_pos=(-100, -100),
         player_size=(35, 35),
         player_texture_path="sprites/bahtiyar/down0.png",
@@ -470,10 +550,26 @@ def scene7() -> Scene:
         texture_path=None,
         z=1,
     )
+    well = StaticObject(
+        id="well",
+        rect=Rect(40, 160, 100, 240),
+        solid=False,
+        interactable=False,
+        texture_path="sprites/bahtiyar/down0.png",
+        z=1,
+    )
+    bucket = StaticObject(
+        id="bucket",
+        rect=Rect(392, 212, 424, 244),
+        solid=False,
+        interactable=False,
+        texture_path="sprites/bahtiyar/down0.png",
+        z=2,
+    )
     return Scene(
         id="scene7",
-        objects=[background, house1, house2, door, babay],
-        player_pos=(230, 220),
+        objects=[background, house1, house2, door, babay, well, bucket],
+        player_pos=(150, 220),
         player_size=(35, 35),
         interact_distance=28.0,
         player_texture_path="sprites/bahtiyar/down0.png",
@@ -591,7 +687,7 @@ def scene9() -> Scene:
     return Scene(
         id="scene9",
         objects=[background, house1, house2, door, babay, ebi, well, bucket],
-        player_pos=(230, 220),
+        player_pos=(150, 220),
         player_size=(35, 35),
         interact_distance=28.0,
         player_texture_path="sprites/bahtiyar/down0.png",
@@ -611,6 +707,22 @@ def scene10() -> Scene:
         z=0,
         scale_texture_to_rect=True,
     )
+    well = StaticObject(
+        id="well",
+        rect=Rect(40, 160, 100, 240),
+        solid=False,
+        interactable=False,
+        texture_path="sprites/bahtiyar/down0.png",
+        z=1,
+    )
+    bucket = StaticObject(
+        id="bucket",
+        rect=Rect(392, 212, 424, 244),
+        solid=False,
+        interactable=False,
+        texture_path="sprites/bahtiyar/down0.png",
+        z=2,
+    )
     door_big = NPC(
         id="door_big",
         name="Ишек",
@@ -627,7 +739,7 @@ def scene10() -> Scene:
     )
     scene = Scene(
         id="scene10",
-        objects=[background, door_big],
+        objects=[background, well, bucket, door_big],
         player_pos=(-100, -100),
         player_size=(80, 80),
         player_texture_path="sprites/bahtiyar/down0.png",
@@ -660,7 +772,7 @@ def scene11() -> Scene:
     book = StaticObject(
         id="book",
         name="Китап",
-        rect=Rect(300, 170, 340, 210),
+        rect=Rect(340, 170, 380, 210),
         solid=False,
         interactable=True,
         next_scene_factory=scene12,
@@ -719,7 +831,7 @@ def scene12() -> Scene:
         texture_path="sprites/bahtiyar/down0.png",
         z=1,
         reward=("китап", "sprites/bahtiyar/down0.png"),
-        next_scene_factory=scene13,
+        next_scene_factory=scene14,
     )
     scene = Scene(
         id="scene12",
@@ -734,7 +846,7 @@ def scene12() -> Scene:
 
 
 def scene13() -> Scene:
-    """House interior with highlighted grandmother requesting water."""
+    """House interior after grandmother's request for water."""
     background = StaticObject(
         id="bg",
         rect=Rect(0, 0, 496, 279),
@@ -758,9 +870,8 @@ def scene13() -> Scene:
         name="Әби",
         rect=Rect(158, 208, 194, 264),
         solid=False,
-        interactable=True,
-        next_scene_factory=scene14,
-        texture_path="sprites/objects/grandma_highlited.png",
+        interactable=False,
+        texture_path="sprites/objects/grandma.png",
         z=1,
     )
     samovar = StaticObject(
@@ -884,7 +995,7 @@ def scene15() -> Scene:
     return Scene(
         id="scene15",
         objects=[background, house1, house2, door, well, bucket, babay],
-        player_pos=(230, 220),
+        player_pos=(150, 220),
         player_size=(35, 35),
         interact_distance=28.0,
         player_texture_path="sprites/bahtiyar/down0.png",
