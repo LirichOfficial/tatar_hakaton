@@ -144,7 +144,8 @@ while running:
         if (obj["texture_path"] is not None):
             sprite = pygame.image.load(obj["texture_path"]).convert_alpha()
             sprite = pygame.transform.scale(sprite, (width, height))
-            screen.blit(sprite, (x_l, y_t))
+            rect = sprite.get_rect(topleft=(x_l, y_t))
+            screen.blit(sprite, rect)
 
     if scene_info["inventory"]["open"]:
         draw_inventory(scene_info["inventory"]["items"])
