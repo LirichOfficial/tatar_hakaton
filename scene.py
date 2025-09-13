@@ -1,6 +1,7 @@
 from __future__ import annotations
 from dataclasses import dataclass, field
 from typing import Callable, List, Optional, Tuple, Literal
+from data_helper import add_inventory_item, load_inventory
 import math
 
 Vec2 = Tuple[float, float]
@@ -169,10 +170,8 @@ class Scene:
     scale_player_texture_to_rect: bool = True
     # Порядок отрисовки игрока:
     player_z: int = 0
-
-    # --- Инвентарь ---
-    # Список элементов инвентаря (слово и путь к картинке)
-    inventory: List[Tuple[str, str]] = field(default_factory=list)
+      
+      
     # Открыт ли сейчас инвентарь
     inventory_open: bool = False
 
@@ -323,7 +322,8 @@ class Scene:
 
     def add_element(self, element: Tuple[str, str]) -> None:
         """Добавить элемент (слово, путь к картинке) в инвентарь."""
-        self.inventory.append(element)
+        word, path = element
+        add_inventory_item(word, path)
 
     def toggle_inventory(self) -> None:
         """Открыть/закрыть инвентарь. Нельзя открыть во время диалога."""
@@ -377,10 +377,7 @@ class Scene:
             },
             "inventory": {
                 "open": self.inventory_open,
-                "items": [
-                    {"word": word, "texture_path": path}
-                    for word, path in self.inventory
-                ],
+                "items": load_inventory(),
             },
         }
 
