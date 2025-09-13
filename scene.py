@@ -170,8 +170,8 @@ class Scene:
     scale_player_texture_to_rect: bool = True
     # Порядок отрисовки игрока:
     player_z: int = 0
-
-    # --- Инвентарь ---
+      
+      
     # Открыт ли сейчас инвентарь
     inventory_open: bool = False
 
