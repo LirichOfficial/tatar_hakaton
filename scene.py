@@ -308,8 +308,6 @@ class Scene:
         self._active_dialog_npc_id = None
         self.text_window.hide()
         next_scene = npc.on_interact(self)
-        if next_scene:
-            next_scene.player_pos = self.return_pos or self.player_pos
         return next_scene
 
     # ---------- Взаимодействие (E) ----------
@@ -332,9 +330,15 @@ class Scene:
         next_scene = self.unteract()
         if next_scene:
             if was_dialog:
-                next_scene.player_pos = self.return_pos or self.player_pos
+                next_scene.player_pos = self.player_pos
+                next_scene.return_pos = self.return_pos
             else:
-                next_scene.return_pos = self.player_pos
+                if "house" not in next_scene.id:
+                    next_scene.player_pos = self.player_pos
+                if self.return_pos is not None:
+                    next_scene.return_pos = self.return_pos
+                else:
+                    next_scene.return_pos = self.player_pos
         return next_scene
 
     # ---------- Инвентарь ----------

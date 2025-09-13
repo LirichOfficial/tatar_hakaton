@@ -36,7 +36,7 @@ def make_house_scene(
     )
     door = StaticObject(
         id="door_exit",
-        rect=Rect(220, 200, 276, 260),
+        rect=Rect(80, 200, 120, 260),
         solid=False,
         interactable=True,
         next_scene_factory=outside_factory,
@@ -285,7 +285,7 @@ def scene4() -> Scene:
         texture_path="sprites/objects/grandma.png",
         z=2,
         reward=("әби", "sprites/objects/grandma.png"),
-        next_scene_factory=scene5,
+        next_scene_factory=scene5_house,
     )
     scene = Scene(
         id="scene4",
@@ -512,7 +512,7 @@ def scene8() -> Scene:
         persist_progress=True,
         texture_path="sprites/objects/grandma.png",
         z=2,
-        next_scene_factory=scene9,
+        next_scene_factory=scene9_house,
     )
     scene = Scene(
         id="scene8",
