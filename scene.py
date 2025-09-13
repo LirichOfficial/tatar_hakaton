@@ -241,7 +241,7 @@ class Scene:
 
         self._update_hint()
 
-    def move_forward(self, step: float = 2.0) -> None:
+    def move_forward(self, step: float = 4.0) -> None:
         if self._is_dialog_active() or self.inventory_open:
             return
         self._move(0, -step)
@@ -250,7 +250,7 @@ class Scene:
         self.c += 1
         self.player_texture_path = self.texture_path_to_player + f'/up{self.l % 5}.png'
 
-    def move_back(self, step: float = 2.0) -> None:
+    def move_back(self, step: float = 4.0) -> None:
         if self._is_dialog_active() or self.inventory_open:
             return
         self._move(0, step)
@@ -259,7 +259,7 @@ class Scene:
         self.c += 1
         self.player_texture_path = self.texture_path_to_player + f'/down{self.l}.png'
 
-    def move_left(self, step: float = 2.0) -> None:
+    def move_left(self, step: float = 4.0) -> None:
         if self._is_dialog_active() or self.inventory_open:
             return
         self._move(-step, 0)
@@ -268,7 +268,7 @@ class Scene:
         self.c += 1
         self.player_texture_path = self.texture_path_to_player + f'/left{self.l}.png'
 
-    def move_right(self,step: float = 2.0) -> None:
+    def move_right(self,step: float = 4.0) -> None:
         if self._is_dialog_active() or self.inventory_open:
             return
         self._move(step, 0)

@@ -41,7 +41,7 @@ def make_house_scene(
         interactable=True,
         next_scene_factory=outside_factory,
         texture_path=None,
-        z=1,
+        z=-1,
     )
     grandma_texture = (
         "sprites/objects/grandma_highlited.png"
@@ -62,7 +62,7 @@ def make_house_scene(
         id=id,
         objects=[background, door, ebi],
         player_pos=(230, 220),
-        player_size=(16, 16),
+        player_size=(20, 20),
         interact_distance=28.0,
         player_texture_path="sprites/bahtiyar/down0.png",
         scale_player_texture_to_rect=True,
@@ -83,7 +83,7 @@ def scene1() -> Scene:
     )
     house1 = StaticObject(
         id="house1",
-        rect=Rect(40, 120, 120, 200),
+        rect=Rect(85, 35, 220, 160),
         solid=False,
         interactable=False,
         texture_path="sprites/objects/house1.png",
@@ -91,7 +91,7 @@ def scene1() -> Scene:
     )
     house2 = StaticObject(
         id="house2",
-        rect=Rect(336, 120, 416, 200),
+        rect=Rect(330, 110, 475, 240),
         solid=False,
         interactable=False,
         texture_path="sprites/objects/house2.png",
@@ -100,12 +100,12 @@ def scene1() -> Scene:
     babay = StaticObject(
         id="babay",
         name="Бабай",
-        rect=Rect(360, 212, 392, 260),
+        rect=Rect(360, 212, 390, 255),
         solid=False,
         interactable=True,
         next_scene_factory=scene2,
         texture_path="sprites/objects/grandpa_highlited.png",
-        z=2,
+        z=1,
     )
     door = StaticObject(
         id="door",
@@ -114,7 +114,7 @@ def scene1() -> Scene:
         interactable=True,
         next_scene_factory=lambda: scene1_house(),
         texture_path=None,
-        z=2,
+        z=1,
     )
     flower = StaticObject(
         id="flower",
@@ -123,17 +123,17 @@ def scene1() -> Scene:
         solid=False,
         interactable=False,
         texture_path="sprites/objects/flower.png",
-        z=2,
+        z=1,
     )
     return Scene(
         id="scene1",
         objects=[background, house1, house2, door, babay, flower],
         player_pos=(230, 220),
-        player_size=(16, 16),
+        player_size=(35, 35),
         interact_distance=28.0,
         player_texture_path="sprites/bahtiyar/down0.png",
         scale_player_texture_to_rect=True,
-        player_z=3,
+        player_z=1,
     )
 
 
@@ -182,7 +182,7 @@ def scene2() -> Scene:
         repeatable=False,
         persist_progress=True,
         texture_path="sprites/objects/grandpa.png",
-        z=2,
+        z=1,
         reward=("бабай", "sprites/objects/grandpa.png"),
         next_scene_factory=scene3,
     )
@@ -192,7 +192,7 @@ def scene2() -> Scene:
         player_pos=(-100, -100),
         player_size=(16, 16),
         player_texture_path="sprites/bahtiyar/down0.png",
-        player_z=-1,
+        player_z=1,
     )
     scene.start_dialog_with(babay_big)
     return scene
@@ -231,7 +231,7 @@ def scene3() -> Scene:
         solid=False,
         interactable=False,
         texture_path="sprites/objects/grandpa.png",
-        z=2,
+        z=1,
     )
     door = StaticObject(
         id="door",
@@ -240,7 +240,7 @@ def scene3() -> Scene:
         interactable=True,
         next_scene_factory=lambda: scene3_house(),
         texture_path=None,
-        z=2,
+        z=1,
     )
     flower = StaticObject(
         id="flower",
@@ -248,7 +248,7 @@ def scene3() -> Scene:
         solid=False,
         interactable=False,
         texture_path="sprites/objects/flower.png",
-        z=2,
+        z=1,
     )
     return Scene(
         id="scene3",
@@ -258,7 +258,7 @@ def scene3() -> Scene:
         interact_distance=28.0,
         player_texture_path="sprites/bahtiyar/down0.png",
         scale_player_texture_to_rect=True,
-        player_z=3,
+        player_z=1,
     )
 
 
@@ -283,7 +283,7 @@ def scene4() -> Scene:
         repeatable=False,
         persist_progress=True,
         texture_path="sprites/objects/grandma.png",
-        z=2,
+        z=1,
         reward=("әби", "sprites/objects/grandma.png"),
         next_scene_factory=scene5_house,
     )
@@ -293,7 +293,7 @@ def scene4() -> Scene:
         player_pos=(-100, -100),
         player_size=(16, 16),
         player_texture_path="sprites/bahtiyar/down0.png",
-        player_z=-1,
+        player_z=1,
     )
     scene.start_dialog_with(ebi_big)
     return scene
@@ -332,7 +332,7 @@ def scene5() -> Scene:
         solid=False,
         interactable=False,
         texture_path="sprites/objects/grandpa.png",
-        z=2,
+        z=1,
     )
     door = StaticObject(
         id="door",
@@ -341,7 +341,7 @@ def scene5() -> Scene:
         interactable=True,
         next_scene_factory=lambda: scene5_house(),
         texture_path=None,
-        z=2,
+        z=1,
     )
     flower = StaticObject(
         id="flower",
@@ -351,7 +351,7 @@ def scene5() -> Scene:
         interactable=True,
         next_scene_factory=scene6,
         texture_path="sprites/objects/flower_highlited.png",
-        z=2,
+        z=1,
     )
     return Scene(
         id="scene5",
@@ -361,7 +361,7 @@ def scene5() -> Scene:
         interact_distance=28.0,
         player_texture_path="sprites/bahtiyar/down0.png",
         scale_player_texture_to_rect=True,
-        player_z=3,
+        player_z=1,
     )
 
 
@@ -410,7 +410,7 @@ def scene6() -> Scene:
         repeatable=False,
         persist_progress=True,
         texture_path="sprites/objects/flower.png",
-        z=2,
+        z=1,
         reward=("чәчәк", "sprites/objects/flower.png"),
         next_scene_factory=scene7,
     )
@@ -420,7 +420,7 @@ def scene6() -> Scene:
         player_pos=(-100, -100),
         player_size=(16, 16),
         player_texture_path="sprites/bahtiyar/down0.png",
-        player_z=-1,
+        player_z=1,
     )
     scene.start_dialog_with(flower_big)
     return scene
@@ -459,7 +459,7 @@ def scene7() -> Scene:
         solid=False,
         interactable=False,
         texture_path="sprites/objects/grandpa.png",
-        z=2,
+        z=1,
     )
     door = StaticObject(
         id="door",
@@ -468,7 +468,7 @@ def scene7() -> Scene:
         interactable=True,
         next_scene_factory=lambda: scene7_house(),
         texture_path=None,
-        z=2,
+        z=1,
     )
     flower = StaticObject(
         id="flower",
@@ -476,7 +476,7 @@ def scene7() -> Scene:
         solid=False,
         interactable=False,
         texture_path="sprites/objects/flower.png",
-        z=2,
+        z=1,
     )
     return Scene(
         id="scene7",
@@ -486,7 +486,7 @@ def scene7() -> Scene:
         interact_distance=28.0,
         player_texture_path="sprites/bahtiyar/down0.png",
         scale_player_texture_to_rect=True,
-        player_z=3,
+        player_z=1,
     )
 
 
@@ -511,7 +511,7 @@ def scene8() -> Scene:
         repeatable=False,
         persist_progress=True,
         texture_path="sprites/objects/grandma.png",
-        z=2,
+        z=1,
         next_scene_factory=scene9_house,
     )
     scene = Scene(
@@ -520,7 +520,7 @@ def scene8() -> Scene:
         player_pos=(-100, -100),
         player_size=(16, 16),
         player_texture_path="sprites/bahtiyar/down0.png",
-        player_z=-1,
+        player_z=1,
     )
     scene.start_dialog_with(ebi_big)
     return scene
@@ -559,7 +559,7 @@ def scene9() -> Scene:
         solid=False,
         interactable=False,
         texture_path="sprites/objects/grandpa.png",
-        z=2,
+        z=1,
     )
     door = StaticObject(
         id="door",
@@ -568,7 +568,7 @@ def scene9() -> Scene:
         interactable=True,
         next_scene_factory=lambda: scene9_house(),
         texture_path=None,
-        z=2,
+        z=1,
     )
     flower = StaticObject(
         id="flower",
@@ -576,7 +576,7 @@ def scene9() -> Scene:
         solid=False,
         interactable=False,
         texture_path="sprites/objects/flower.png",
-        z=2,
+        z=1,
     )
     return Scene(
         id="scene9",
@@ -586,7 +586,7 @@ def scene9() -> Scene:
         interact_distance=28.0,
         player_texture_path="sprites/bahtiyar/down0.png",
         scale_player_texture_to_rect=True,
-        player_z=3,
+        player_z=1,
     )
 
 

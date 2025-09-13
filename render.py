@@ -84,10 +84,10 @@ clock = pygame.time.Clock()
 
 data = load_game()
 print(data)
-if "scene" not in data.keys():
-    current_scene: Scene = scene1()
-else:
-    current_scene: Scene = scenes.scenes[data["scene"]]
+#if "scene" not in data.keys():
+current_scene: Scene = scene1()
+#else:
+#    current_scene: Scene = scenes.scenes[data["scene"]]
 
 
 def cmp_objects(obj1, obj2):
@@ -140,10 +140,11 @@ while running:
         y_t = int(rect.y1 * SCALE)
         width = int((rect.x2 - rect.x1) * SCALE)
         height = int((rect.y2 - rect.y1) * SCALE)
-
-        sprite = pygame.image.load(obj["texture_path"]).convert_alpha()
-        sprite = pygame.transform.scale(sprite, (width, height))
-        screen.blit(sprite, (x_l, y_t))
+    
+        if (obj["texture_path"] is not None):
+            sprite = pygame.image.load(obj["texture_path"]).convert_alpha()
+            sprite = pygame.transform.scale(sprite, (width, height))
+            screen.blit(sprite, (x_l, y_t))
 
     if scene_info["inventory"]["open"]:
         draw_inventory(scene_info["inventory"]["items"])
