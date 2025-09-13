@@ -277,7 +277,7 @@ def scene4() -> Scene:
         id="ebi_big",
         name="Әби",
         rect=Rect(40, 190, 90, 280),
-        solid=False,
+       solid=False,
         interactable=True,
         dialog_lines=["Исәнмесез, бир миңа чәчәк"],
         repeatable=False,
