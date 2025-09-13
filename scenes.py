@@ -62,7 +62,7 @@ def make_house_scene(
         id=id,
         objects=[background, door, ebi],
         player_pos=(230, 220),
-        player_size=(20, 20),
+        player_size=(70, 70),
         interact_distance=28.0,
         player_texture_path="sprites/bahtiyar/down0.png",
         scale_player_texture_to_rect=True,
@@ -150,7 +150,7 @@ def scene2() -> Scene:
     )
     house1 = StaticObject(
         id="house1",
-        rect=Rect(40, 120, 175, 245),
+        rect=Rect(85, 35, 220, 160),
         solid=False,
         interactable=False,
         texture_path="sprites/objects/house1.png",
@@ -158,7 +158,7 @@ def scene2() -> Scene:
     )
     house2 = StaticObject(
         id="house2",
-        rect=Rect(336, 120, 481, 250),
+        rect=Rect(330, 110, 475, 240),
         solid=False,
         interactable=False,
         texture_path="sprites/objects/house2.png",
@@ -166,7 +166,7 @@ def scene2() -> Scene:
     )
     flower = StaticObject(
         id="flower",
-        rect=Rect(236, 232, 260, 260),
+        rect=Rect(236, 210, 260, 238),
         solid=False,
         interactable=False,
         texture_path="sprites/objects/flower.png",
@@ -190,7 +190,7 @@ def scene2() -> Scene:
         id="scene2",
         objects=[background, house1, house2, flower, babay_big],
         player_pos=(-100, -100),
-        player_size=(16, 16),
+        player_size=(35, 35),
         player_texture_path="sprites/bahtiyar/down0.png",
         player_z=1,
     )
@@ -211,7 +211,7 @@ def scene3() -> Scene:
     )
     house1 = StaticObject(
         id="house1",
-        rect=Rect(40, 120, 175, 245),
+        rect=Rect(85, 35, 220, 160),
         solid=False,
         interactable=False,
         texture_path="sprites/objects/house_highlited.png",
@@ -219,7 +219,7 @@ def scene3() -> Scene:
     )
     house2 = StaticObject(
         id="house2",
-        rect=Rect(336, 120, 481, 250),
+        rect=Rect(330, 110, 475, 240),
         solid=False,
         interactable=False,
         texture_path="sprites/objects/house2.png",
@@ -254,7 +254,7 @@ def scene3() -> Scene:
         id="scene3",
         objects=[background, house1, house2, door, babay, flower],
         player_pos=(230, 220),
-        player_size=(16, 16),
+        player_size=(35, 35),
         interact_distance=28.0,
         player_texture_path="sprites/bahtiyar/down0.png",
         scale_player_texture_to_rect=True,
@@ -291,7 +291,7 @@ def scene4() -> Scene:
         id="scene4",
         objects=[background, ebi_big],
         player_pos=(-100, -100),
-        player_size=(16, 16),
+        player_size=(70, 70),
         player_texture_path="sprites/bahtiyar/down0.png",
         player_z=1,
     )
@@ -312,7 +312,7 @@ def scene5() -> Scene:
     )
     house1 = StaticObject(
         id="house1",
-        rect=Rect(40, 120, 175, 245),
+        rect=Rect(85, 35, 220, 160),
         solid=False,
         interactable=False,
         texture_path="sprites/objects/house1.png",
@@ -320,7 +320,7 @@ def scene5() -> Scene:
     )
     house2 = StaticObject(
         id="house2",
-        rect=Rect(336, 120, 481, 250),
+        rect=Rect(330, 110, 475, 240),
         solid=False,
         interactable=False,
         texture_path="sprites/objects/house2.png",
@@ -346,7 +346,7 @@ def scene5() -> Scene:
     flower = StaticObject(
         id="flower",
         name="Чәчәк",
-        rect=Rect(236, 232, 260, 260),
+        rect=Rect(236, 210, 260, 238),
         solid=False,
         interactable=True,
         next_scene_factory=scene6,
@@ -357,7 +357,7 @@ def scene5() -> Scene:
         id="scene5",
         objects=[background, house1, house2, door, babay, flower],
         player_pos=(230, 220),
-        player_size=(16, 16),
+        player_size=(35, 35),
         interact_distance=28.0,
         player_texture_path="sprites/bahtiyar/down0.png",
         scale_player_texture_to_rect=True,
@@ -378,7 +378,7 @@ def scene6() -> Scene:
     )
     house1 = StaticObject(
         id="house1",
-        rect=Rect(40, 120, 175, 245),
+        rect=Rect(85, 35, 220, 160),
         solid=False,
         interactable=False,
         texture_path="sprites/objects/house1.png",
@@ -386,7 +386,7 @@ def scene6() -> Scene:
     )
     house2 = StaticObject(
         id="house2",
-        rect=Rect(336, 120, 481, 250),
+        rect=Rect(330, 110, 475, 240),
         solid=False,
         interactable=False,
         texture_path="sprites/objects/house2.png",
@@ -403,7 +403,7 @@ def scene6() -> Scene:
     flower_big = NPC(
         id="flower_big",
         name="Чәчәк",
-        rect=Rect(220, 212, 244, 240),
+        rect=Rect(236, 210, 260, 238),
         solid=False,
         interactable=True,
         dialog_lines=["Чәчәк"],
@@ -418,7 +418,7 @@ def scene6() -> Scene:
         id="scene6",
         objects=[background, house1, house2, babay, flower_big],
         player_pos=(-100, -100),
-        player_size=(16, 16),
+        player_size=(35, 35),
         player_texture_path="sprites/bahtiyar/down0.png",
         player_z=1,
     )
@@ -439,7 +439,7 @@ def scene7() -> Scene:
     )
     house1 = StaticObject(
         id="house1",
-        rect=Rect(40, 120, 175, 245),
+        rect=Rect(85, 35, 220, 160),
         solid=False,
         interactable=False,
         texture_path="sprites/objects/house_highlited.png",
@@ -447,7 +447,7 @@ def scene7() -> Scene:
     )
     house2 = StaticObject(
         id="house2",
-        rect=Rect(336, 120, 481, 250),
+        rect=Rect(330, 110, 475, 240),
         solid=False,
         interactable=False,
         texture_path="sprites/objects/house2.png",
@@ -472,7 +472,7 @@ def scene7() -> Scene:
     )
     flower = StaticObject(
         id="flower",
-        rect=Rect(236, 232, 260, 260),
+        rect=Rect(236, 210, 260, 238),
         solid=False,
         interactable=False,
         texture_path="sprites/objects/flower.png",
@@ -482,7 +482,7 @@ def scene7() -> Scene:
         id="scene7",
         objects=[background, house1, house2, door, babay, flower],
         player_pos=(230, 220),
-        player_size=(16, 16),
+        player_size=(35, 35),
         interact_distance=28.0,
         player_texture_path="sprites/bahtiyar/down0.png",
         scale_player_texture_to_rect=True,
@@ -518,7 +518,7 @@ def scene8() -> Scene:
         id="scene8",
         objects=[background, ebi_big],
         player_pos=(-100, -100),
-        player_size=(16, 16),
+        player_size=(70, 70),
         player_texture_path="sprites/bahtiyar/down0.png",
         player_z=1,
     )
@@ -539,7 +539,7 @@ def scene9() -> Scene:
     )
     house1 = StaticObject(
         id="house1",
-        rect=Rect(40, 120, 175, 245),
+        rect=Rect(85, 35, 220, 160),
         solid=False,
         interactable=False,
         texture_path="sprites/objects/house1.png",
@@ -547,7 +547,7 @@ def scene9() -> Scene:
     )
     house2 = StaticObject(
         id="house2",
-        rect=Rect(336, 120, 481, 250),
+        rect=Rect(330, 110, 475, 240),
         solid=False,
         interactable=False,
         texture_path="sprites/objects/house2.png",
@@ -572,7 +572,7 @@ def scene9() -> Scene:
     )
     flower = StaticObject(
         id="flower",
-        rect=Rect(236, 232, 260, 260),
+        rect=Rect(236, 210, 260, 238),
         solid=False,
         interactable=False,
         texture_path="sprites/objects/flower.png",
@@ -582,7 +582,7 @@ def scene9() -> Scene:
         id="scene9",
         objects=[background, house1, house2, door, babay, flower],
         player_pos=(230, 220),
-        player_size=(16, 16),
+        player_size=(35, 35),
         interact_distance=28.0,
         player_texture_path="sprites/bahtiyar/down0.png",
         scale_player_texture_to_rect=True,
