@@ -14,7 +14,60 @@ Interacting with a highlighted object adds the corresponding word and
 placeholder image to the player's inventory.
 """
 
-from scene import Scene, StaticObject, NPC, Rect
+from scene import Scene, StaticObject, NPC, Rect, SceneFactory
+from typing import Optional
+
+
+def make_house_scene(
+    id: str,
+    outside_factory: SceneFactory,
+    highlight: bool = False,
+    next_scene_factory: Optional[SceneFactory] = None,
+) -> Scene:
+    """Generic interior of the left house with grandma."""
+    background = StaticObject(
+        id="bg",
+        rect=Rect(0, 0, 496, 279),
+        solid=False,
+        interactable=False,
+        texture_path="sprites/backgrounds/home.png",
+        z=0,
+        scale_texture_to_rect=True,
+    )
+    door = StaticObject(
+        id="door_exit",
+        rect=Rect(220, 200, 276, 260),
+        solid=False,
+        interactable=True,
+        next_scene_factory=outside_factory,
+        texture_path=None,
+        z=1,
+    )
+    grandma_texture = (
+        "sprites/objects/grandma_highlited.png"
+        if highlight
+        else "sprites/objects/grandma.png"
+    )
+    ebi = StaticObject(
+        id="ebi",
+        name="Әби",
+        rect=Rect(160, 212, 192, 260),
+        solid=False,
+        interactable=highlight,
+        next_scene_factory=next_scene_factory,
+        texture_path=grandma_texture,
+        z=1,
+    )
+    return Scene(
+        id=id,
+        objects=[background, door, ebi],
+        player_pos=(230, 220),
+        player_size=(16, 16),
+        interact_distance=28.0,
+        player_texture_path="sprites/bahtiyar/down0.png",
+        scale_player_texture_to_rect=True,
+        player_z=2,
+    )
 
 
 def scene1() -> Scene:
@@ -47,20 +100,20 @@ def scene1() -> Scene:
     babay = StaticObject(
         id="babay",
         name="Бабай",
-        rect=Rect(360, 150, 420, 260),
+        rect=Rect(360, 212, 392, 260),
         solid=False,
         interactable=True,
         next_scene_factory=scene2,
         texture_path="sprites/objects/grandpa_highlited.png",
         z=2,
     )
-    ebi = StaticObject(
-        id="ebi",
-        name="Әби",
-        rect=Rect(80, 150, 140, 260),
+    door = StaticObject(
+        id="door",
+        rect=Rect(80, 180, 100, 220),
         solid=False,
-        interactable=False,
-        texture_path="sprites/objects/grandma.png",
+        interactable=True,
+        next_scene_factory=lambda: scene1_house(),
+        texture_path=None,
         z=2,
     )
     flower = StaticObject(
@@ -74,7 +127,7 @@ def scene1() -> Scene:
     )
     return Scene(
         id="scene1",
-        objects=[background, house1, house2, babay, ebi, flower],
+        objects=[background, house1, house2, door, babay, flower],
         player_pos=(230, 220),
         player_size=(16, 16),
         interact_distance=28.0,
@@ -111,17 +164,9 @@ def scene2() -> Scene:
         texture_path="sprites/objects/house2.png",
         z=1,
     )
-    ebi = StaticObject(
-        id="ebi",
-        rect=Rect(80, 150, 140, 260),
-        solid=False,
-        interactable=False,
-        texture_path="sprites/objects/grandma.png",
-        z=1,
-    )
     flower = StaticObject(
         id="flower",
-        rect=Rect(236, 210, 260, 238),
+        rect=Rect(236, 232, 260, 260),
         solid=False,
         interactable=False,
         texture_path="sprites/objects/flower.png",
@@ -130,7 +175,7 @@ def scene2() -> Scene:
     babay_big = NPC(
         id="babay_big",
         name="Бабай",
-        rect=Rect(20, 20, 220, 259),
+        rect=Rect(40, 212, 72, 260),
         solid=False,
         interactable=True,
         dialog_lines=["Сәлам!"],
@@ -143,7 +188,7 @@ def scene2() -> Scene:
     )
     scene = Scene(
         id="scene2",
-        objects=[background, house1, house2, ebi, flower, babay_big],
+        objects=[background, house1, house2, flower, babay_big],
         player_pos=(-100, -100),
         player_size=(16, 16),
         player_texture_path="sprites/bahtiyar/down0.png",
@@ -154,7 +199,7 @@ def scene2() -> Scene:
 
 
 def scene3() -> Scene:
-    """Walking scene with highlighted grandmother."""
+    """Walking scene leading to grandmother's house."""
     background = StaticObject(
         id="bg",
         rect=Rect(0, 0, 496, 279),
@@ -182,20 +227,19 @@ def scene3() -> Scene:
     )
     babay = StaticObject(
         id="babay",
-        rect=Rect(360, 150, 420, 260),
+        rect=Rect(360, 212, 392, 260),
         solid=False,
         interactable=False,
         texture_path="sprites/objects/grandpa.png",
         z=2,
     )
-    ebi = StaticObject(
-        id="ebi",
-        name="Әби",
-        rect=Rect(80, 150, 140, 260),
+    door = StaticObject(
+        id="door",
+        rect=Rect(80, 180, 100, 220),
         solid=False,
         interactable=True,
-        next_scene_factory=scene4,
-        texture_path="sprites/objects/grandma_highlited.png",
+        next_scene_factory=lambda: scene3_house(),
+        texture_path=None,
         z=2,
     )
     flower = StaticObject(
@@ -208,7 +252,7 @@ def scene3() -> Scene:
     )
     return Scene(
         id="scene3",
-        objects=[background, house1, house2, babay, ebi, flower],
+        objects=[background, house1, house2, door, babay, flower],
         player_pos=(230, 220),
         player_size=(16, 16),
         interact_distance=28.0,
@@ -225,46 +269,14 @@ def scene4() -> Scene:
         rect=Rect(0, 0, 496, 279),
         solid=False,
         interactable=False,
-        texture_path="sprites/backgrounds/root.png",
+        texture_path="sprites/backgrounds/home.png",
         z=0,
         scale_texture_to_rect=True,
-    )
-    house1 = StaticObject(
-        id="house1",
-        rect=Rect(40, 120, 120, 200),
-        solid=False,
-        interactable=False,
-        texture_path="sprites/objects/house1.png",
-        z=1,
-    )
-    house2 = StaticObject(
-        id="house2",
-        rect=Rect(336, 120, 416, 200),
-        solid=False,
-        interactable=False,
-        texture_path="sprites/objects/house2.png",
-        z=1,
-    )
-    babay = StaticObject(
-        id="babay",
-        rect=Rect(360, 150, 420, 260),
-        solid=False,
-        interactable=False,
-        texture_path="sprites/objects/grandpa.png",
-        z=1,
-    )
-    flower = StaticObject(
-        id="flower",
-        rect=Rect(236, 210, 260, 238),
-        solid=False,
-        interactable=False,
-        texture_path="sprites/objects/flower.png",
-        z=1,
     )
     ebi_big = NPC(
         id="ebi_big",
         name="Әби",
-        rect=Rect(20, 20, 220, 259),
+        rect=Rect(40, 212, 72, 260),
         solid=False,
         interactable=True,
         dialog_lines=["Исәнмесез, бир миңа чәчәк"],
@@ -277,7 +289,7 @@ def scene4() -> Scene:
     )
     scene = Scene(
         id="scene4",
-        objects=[background, house1, house2, babay, flower, ebi_big],
+        objects=[background, ebi_big],
         player_pos=(-100, -100),
         player_size=(16, 16),
         player_texture_path="sprites/bahtiyar/down0.png",
@@ -316,24 +328,25 @@ def scene5() -> Scene:
     )
     babay = StaticObject(
         id="babay",
-        rect=Rect(360, 150, 420, 260),
+        rect=Rect(360, 212, 392, 260),
         solid=False,
         interactable=False,
         texture_path="sprites/objects/grandpa.png",
         z=2,
     )
-    ebi = StaticObject(
-        id="ebi",
-        rect=Rect(80, 150, 140, 260),
+    door = StaticObject(
+        id="door",
+        rect=Rect(80, 180, 100, 220),
         solid=False,
-        interactable=False,
-        texture_path="sprites/objects/grandma.png",
+        interactable=True,
+        next_scene_factory=lambda: scene5_house(),
+        texture_path=None,
         z=2,
     )
     flower = StaticObject(
         id="flower",
         name="Чәчәк",
-        rect=Rect(236, 210, 260, 238),
+        rect=Rect(236, 232, 260, 260),
         solid=False,
         interactable=True,
         next_scene_factory=scene6,
@@ -342,7 +355,7 @@ def scene5() -> Scene:
     )
     return Scene(
         id="scene5",
-        objects=[background, house1, house2, babay, ebi, flower],
+        objects=[background, house1, house2, door, babay, flower],
         player_pos=(230, 220),
         player_size=(16, 16),
         interact_distance=28.0,
@@ -381,24 +394,16 @@ def scene6() -> Scene:
     )
     babay = StaticObject(
         id="babay",
-        rect=Rect(360, 150, 420, 260),
+        rect=Rect(360, 212, 392, 260),
         solid=False,
         interactable=False,
         texture_path="sprites/objects/grandpa.png",
         z=1,
     )
-    ebi = StaticObject(
-        id="ebi",
-        rect=Rect(80, 150, 140, 260),
-        solid=False,
-        interactable=False,
-        texture_path="sprites/objects/grandma.png",
-        z=1,
-    )
     flower_big = NPC(
         id="flower_big",
         name="Чәчәк",
-        rect=Rect(150, 30, 346, 250),
+        rect=Rect(220, 212, 252, 260),
         solid=False,
         interactable=True,
         dialog_lines=["Чәчәк"],
@@ -411,7 +416,7 @@ def scene6() -> Scene:
     )
     scene = Scene(
         id="scene6",
-        objects=[background, house1, house2, babay, ebi, flower_big],
+        objects=[background, house1, house2, babay, flower_big],
         player_pos=(-100, -100),
         player_size=(16, 16),
         player_texture_path="sprites/bahtiyar/down0.png",
@@ -450,25 +455,24 @@ def scene7() -> Scene:
     )
     babay = StaticObject(
         id="babay",
-        rect=Rect(360, 150, 420, 260),
+        rect=Rect(360, 212, 392, 260),
         solid=False,
         interactable=False,
         texture_path="sprites/objects/grandpa.png",
         z=2,
     )
-    ebi = StaticObject(
-        id="ebi",
-        name="Әби",
-        rect=Rect(80, 150, 140, 260),
+    door = StaticObject(
+        id="door",
+        rect=Rect(80, 180, 100, 220),
         solid=False,
         interactable=True,
-        next_scene_factory=scene8,
-        texture_path="sprites/objects/grandma_highlited.png",
+        next_scene_factory=lambda: scene7_house(),
+        texture_path=None,
         z=2,
     )
     flower = StaticObject(
         id="flower",
-        rect=Rect(236, 210, 260, 238),
+        rect=Rect(236, 232, 260, 260),
         solid=False,
         interactable=False,
         texture_path="sprites/objects/flower.png",
@@ -476,7 +480,7 @@ def scene7() -> Scene:
     )
     return Scene(
         id="scene7",
-        objects=[background, house1, house2, babay, ebi, flower],
+        objects=[background, house1, house2, door, babay, flower],
         player_pos=(230, 220),
         player_size=(16, 16),
         interact_distance=28.0,
@@ -493,46 +497,14 @@ def scene8() -> Scene:
         rect=Rect(0, 0, 496, 279),
         solid=False,
         interactable=False,
-        texture_path="sprites/backgrounds/root.png",
+        texture_path="sprites/backgrounds/home.png",
         z=0,
         scale_texture_to_rect=True,
-    )
-    house1 = StaticObject(
-        id="house1",
-        rect=Rect(40, 120, 120, 200),
-        solid=False,
-        interactable=False,
-        texture_path="sprites/objects/house1.png",
-        z=1,
-    )
-    house2 = StaticObject(
-        id="house2",
-        rect=Rect(336, 120, 416, 200),
-        solid=False,
-        interactable=False,
-        texture_path="sprites/objects/house2.png",
-        z=1,
-    )
-    babay = StaticObject(
-        id="babay",
-        rect=Rect(360, 150, 420, 260),
-        solid=False,
-        interactable=False,
-        texture_path="sprites/objects/grandpa.png",
-        z=1,
-    )
-    flower = StaticObject(
-        id="flower",
-        rect=Rect(236, 210, 260, 238),
-        solid=False,
-        interactable=False,
-        texture_path="sprites/objects/flower.png",
-        z=1,
     )
     ebi_big = NPC(
         id="ebi_big_final",
         name="Әби",
-        rect=Rect(20, 20, 220, 259),
+        rect=Rect(40, 212, 72, 260),
         solid=False,
         interactable=True,
         dialog_lines=["Рәхмәт"],
@@ -544,7 +516,7 @@ def scene8() -> Scene:
     )
     scene = Scene(
         id="scene8",
-        objects=[background, house1, house2, babay, flower, ebi_big],
+        objects=[background, ebi_big],
         player_pos=(-100, -100),
         player_size=(16, 16),
         player_texture_path="sprites/bahtiyar/down0.png",
@@ -583,23 +555,24 @@ def scene9() -> Scene:
     )
     babay = StaticObject(
         id="babay",
-        rect=Rect(360, 150, 420, 260),
+        rect=Rect(360, 212, 392, 260),
         solid=False,
         interactable=False,
         texture_path="sprites/objects/grandpa.png",
         z=2,
     )
-    ebi = StaticObject(
-        id="ebi",
-        rect=Rect(80, 150, 140, 260),
+    door = StaticObject(
+        id="door",
+        rect=Rect(80, 180, 100, 220),
         solid=False,
-        interactable=False,
-        texture_path="sprites/objects/grandma.png",
+        interactable=True,
+        next_scene_factory=lambda: scene9_house(),
+        texture_path=None,
         z=2,
     )
     flower = StaticObject(
         id="flower",
-        rect=Rect(236, 210, 260, 238),
+        rect=Rect(236, 232, 260, 260),
         solid=False,
         interactable=False,
         texture_path="sprites/objects/flower.png",
@@ -607,7 +580,7 @@ def scene9() -> Scene:
     )
     return Scene(
         id="scene9",
-        objects=[background, house1, house2, babay, ebi, flower],
+        objects=[background, house1, house2, door, babay, flower],
         player_pos=(230, 220),
         player_size=(16, 16),
         interact_distance=28.0,
@@ -615,6 +588,26 @@ def scene9() -> Scene:
         scale_player_texture_to_rect=True,
         player_z=3,
     )
+
+
+def scene1_house() -> Scene:
+    return make_house_scene("scene1_house", scene1)
+
+
+def scene3_house() -> Scene:
+    return make_house_scene("scene3_house", scene3, True, scene4)
+
+
+def scene5_house() -> Scene:
+    return make_house_scene("scene5_house", scene5)
+
+
+def scene7_house() -> Scene:
+    return make_house_scene("scene7_house", scene7, True, scene8)
+
+
+def scene9_house() -> Scene:
+    return make_house_scene("scene9_house", scene9)
 
 
 scenes = {
@@ -627,5 +620,10 @@ scenes = {
     "scene7": scene7(),
     "scene8": scene8(),
     "scene9": scene9(),
+    "scene1_house": scene1_house(),
+    "scene3_house": scene3_house(),
+    "scene5_house": scene5_house(),
+    "scene7_house": scene7_house(),
+    "scene9_house": scene9_house(),
 }
 
