@@ -116,6 +116,7 @@ class NPC(GameObject):
     _dialog_index: int = 0
     repeatable: bool = False
     persist_progress: bool = True
+    reward: Optional[Tuple[str, str]] = None
 
     def has_dialog(self) -> bool:
         return len(self.dialog_lines) > 0
@@ -133,9 +134,14 @@ class NPC(GameObject):
             return line
         return None
 
-    def on_dialog_finished(self) -> None:
+    def on_dialog_finished(self, scene: "Scene") -> None:
         if not self.repeatable:
             self.interactable = False
+        if self.reward:
+            # Добавляем слово в словарь игрока и сбрасываем награду,
+            # чтобы не добавлять его повторно при повторных диалогах.
+            scene.add_element(self.reward)
+            self.reward = None
 
     def on_interact(self, scene: "Scene") -> Optional["Scene"]:
         if self.is_dialog_finished() and self.next_scene_factory:
@@ -170,12 +176,14 @@ class Scene:
     scale_player_texture_to_rect: bool = True
     # Порядок отрисовки игрока:
     player_z: int = 0
-      
-      
+
+
     # Открыт ли сейчас инвентарь
     inventory_open: bool = False
 
     _active_dialog_npc_id: Optional[str] = None
+    # Сохранённая позиция игрока для возврата после диалога
+    return_pos: Optional[Vec2] = None
 
     # ---------- Служебные ----------
 
@@ -211,7 +219,8 @@ class Scene:
             return
         obj, dist = self._nearest_interactable()
         if obj and dist <= self.interact_distance:
-            self.text_window.show_hint("Нажмите E, чтобы взаимодействовать", obj.id)
+            # Подсказка на татарском языке
+            self.text_window.show_hint("E басып, эш итегез", obj.id)
         else:
             if self.text_window.mode == "hint":
                 self.text_window.hide()
@@ -295,10 +304,11 @@ class Scene:
         if line is not None:
             self.text_window.show_dialog(line, npc.id)
             return None
-        npc.on_dialog_finished()
+        npc.on_dialog_finished(self)
         self._active_dialog_npc_id = None
         self.text_window.hide()
-        return npc.on_interact(self)
+        next_scene = npc.on_interact(self)
+        return next_scene
 
     # ---------- Взаимодействие (E) ----------
 
@@ -316,14 +326,30 @@ class Scene:
         return obj.on_interact(self)
 
     def interact(self) -> Optional["Scene"]:
-        return self.unteract()
+        was_dialog = self._is_dialog_active()
+        next_scene = self.unteract()
+        if next_scene:
+            if was_dialog:
+                next_scene.player_pos = self.player_pos
+                next_scene.return_pos = self.return_pos
+            else:
+                if "house" not in next_scene.id:
+                    next_scene.player_pos = self.player_pos
+                if self.return_pos is not None:
+                    next_scene.return_pos = self.return_pos
+                else:
+                    next_scene.return_pos = self.player_pos
+        return next_scene
 
     # ---------- Инвентарь ----------
 
     def add_element(self, element: Tuple[str, str]) -> None:
         """Добавить элемент (слово, путь к картинке) в инвентарь."""
         word, path = element
-        add_inventory_item(word, path)
+        # Не добавляем слово, если оно уже есть в словаре
+        inventory = load_inventory()
+        if word not in [item["word"] for item in inventory]:
+            add_inventory_item(word, path)
 
     def toggle_inventory(self) -> None:
         """Открыть/закрыть инвентарь. Нельзя открыть во время диалога."""
