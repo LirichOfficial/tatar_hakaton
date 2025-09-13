@@ -176,12 +176,14 @@ class Scene:
     scale_player_texture_to_rect: bool = True
     # Порядок отрисовки игрока:
     player_z: int = 0
-      
-      
+
+
     # Открыт ли сейчас инвентарь
     inventory_open: bool = False
 
     _active_dialog_npc_id: Optional[str] = None
+    # Сохранённая позиция игрока для возврата после диалога
+    return_pos: Optional[Vec2] = None
 
     # ---------- Служебные ----------
 
@@ -305,7 +307,10 @@ class Scene:
         npc.on_dialog_finished(self)
         self._active_dialog_npc_id = None
         self.text_window.hide()
-        return npc.on_interact(self)
+        next_scene = npc.on_interact(self)
+        if next_scene:
+            next_scene.player_pos = self.return_pos or self.player_pos
+        return next_scene
 
     # ---------- Взаимодействие (E) ----------
 
@@ -323,7 +328,14 @@ class Scene:
         return obj.on_interact(self)
 
     def interact(self) -> Optional["Scene"]:
-        return self.unteract()
+        was_dialog = self._is_dialog_active()
+        next_scene = self.unteract()
+        if next_scene:
+            if was_dialog:
+                next_scene.player_pos = self.return_pos or self.player_pos
+            else:
+                next_scene.return_pos = self.player_pos
+        return next_scene
 
     # ---------- Инвентарь ----------
 

@@ -540,6 +540,7 @@ def scene8() -> Scene:
         persist_progress=True,
         texture_path="sprites/objects/grandma.png",
         z=2,
+        next_scene_factory=scene9,
     )
     scene = Scene(
         id="scene8",
@@ -553,6 +554,69 @@ def scene8() -> Scene:
     return scene
 
 
+def scene9() -> Scene:
+    """Final walking scene after grandmother thanks the player."""
+    background = StaticObject(
+        id="bg",
+        rect=Rect(0, 0, 496, 279),
+        solid=False,
+        interactable=False,
+        texture_path="sprites/backgrounds/root.png",
+        z=0,
+        scale_texture_to_rect=True,
+    )
+    house1 = StaticObject(
+        id="house1",
+        rect=Rect(40, 120, 120, 200),
+        solid=False,
+        interactable=False,
+        texture_path="sprites/objects/house1.png",
+        z=1,
+    )
+    house2 = StaticObject(
+        id="house2",
+        rect=Rect(336, 120, 416, 200),
+        solid=False,
+        interactable=False,
+        texture_path="sprites/objects/house2.png",
+        z=1,
+    )
+    babay = StaticObject(
+        id="babay",
+        rect=Rect(360, 150, 420, 260),
+        solid=False,
+        interactable=False,
+        texture_path="sprites/objects/grandpa.png",
+        z=2,
+    )
+    ebi = StaticObject(
+        id="ebi",
+        rect=Rect(80, 150, 140, 260),
+        solid=False,
+        interactable=False,
+        texture_path="sprites/objects/grandma.png",
+        z=2,
+    )
+    flower = StaticObject(
+        id="flower",
+        rect=Rect(236, 210, 260, 238),
+        solid=False,
+        interactable=False,
+        texture_path="sprites/objects/flower.png",
+        z=2,
+    )
+    return Scene(
+        id="scene9",
+        objects=[background, house1, house2, babay, ebi, flower],
+        player_pos=(230, 220),
+        player_size=(16, 16),
+        interact_distance=28.0,
+        player_texture_path="sprites/bahtiyar/down0.png",
+        scale_player_texture_to_rect=True,
+        player_z=3,
+    )
+
+
 scenes = {
     "scene1": scene1(),
     "scene2": scene2(),
@@ -562,5 +626,6 @@ scenes = {
     "scene6": scene6(),
     "scene7": scene7(),
     "scene8": scene8(),
+    "scene9": scene9(),
 }
 
