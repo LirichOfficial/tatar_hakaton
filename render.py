@@ -116,33 +116,9 @@ while running:
             if event.key == pygame.K_q:
                 current_scene.toggle_inventory()
 
-    screen.fill((0, 0, 0))
-    scene_info = current_scene.get_draw_data()
-
-    sorted_objects = scene_info["objects"]
-    sorted_objects.append(scene_info["player"])
-    sorted_objects.sort(key=cmp_to_key(cmp_objects))
-
-    for obj in sorted_objects:
-        rect = obj["rect"]
-        x_l = rect.x1 * SCALE
-        y_t = rect.y1 * SCALE
-        width = (rect.x2 - rect.x1) * SCALE
-        height = (rect.y2 - rect.y1) * SCALE
-
-        sprite = pygame.image.load(obj["texture_path"]).convert_alpha()
-        sprite = pygame.transform.scale(sprite, (width, height))
-        rect = sprite.get_rect(topleft=(x_l, y_t))
-        screen.blit(sprite, rect)
-
-    if scene_info["inventory"]["open"]:
-        draw_inventory(scene_info["inventory"]["items"])
-    elif scene_info["ui"]["mode"] == "dialog":
-        draw_dialog(scene_info["ui"]["text"], scene_info["inventory"]["items"])
-    else:
-        if scene_info["ui"]["mode"] == "hint":
-            screen.blit(E_SPRITE, E_RECT)
-        keys = pygame.key.get_pressed()
+    # обновляем позицию игрока до отрисовки
+    keys = pygame.key.get_pressed()
+    if not current_scene.inventory_open and current_scene.text_window.mode != "dialog":
         if keys[pygame.K_w] or keys[pygame.K_UP]:
             current_scene.move_forward()
         if keys[pygame.K_s] or keys[pygame.K_DOWN]:
@@ -151,6 +127,31 @@ while running:
             current_scene.move_left()
         if keys[pygame.K_d] or keys[pygame.K_RIGHT]:
             current_scene.move_right()
+
+    scene_info = current_scene.get_draw_data()
+    screen.fill((0, 0, 0))
+
+    sorted_objects = scene_info["objects"] + [scene_info["player"]]
+    sorted_objects.sort(key=cmp_to_key(cmp_objects))
+
+    for obj in sorted_objects:
+        rect = obj["rect"]
+        x_l = int(rect.x1 * SCALE)
+        y_t = int(rect.y1 * SCALE)
+        width = int((rect.x2 - rect.x1) * SCALE)
+        height = int((rect.y2 - rect.y1) * SCALE)
+
+        sprite = pygame.image.load(obj["texture_path"]).convert_alpha()
+        sprite = pygame.transform.scale(sprite, (width, height))
+        screen.blit(sprite, (x_l, y_t))
+
+    if scene_info["inventory"]["open"]:
+        draw_inventory(scene_info["inventory"]["items"])
+    elif scene_info["ui"]["mode"] == "dialog":
+        draw_dialog(scene_info["ui"]["text"], scene_info["inventory"]["items"])
+    else:
+        if scene_info["ui"]["mode"] == "hint":
+            screen.blit(E_SPRITE, E_RECT)
 
     pygame.display.flip()
     clock.tick(FPS)
