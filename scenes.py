@@ -36,7 +36,7 @@ def make_house_scene(
     )
     door = StaticObject(
         id="door_exit",
-        rect=Rect(80, 200, 120, 260),
+        rect=Rect(60, 80, 120, 200),
         solid=False,
         interactable=True,
         next_scene_factory=outside_factory,
@@ -582,7 +582,7 @@ def scene9() -> Scene:
     bucket = StaticObject(
         id="bucket",
         name="Су",
-        rect=Rect(60, 200, 92, 232),
+        rect=Rect(392, 212, 424, 244),
         solid=False,
         interactable=False,
         texture_path="sprites/bahtiyar/down0.png",
@@ -650,7 +650,7 @@ def scene11() -> Scene:
     )
     door_exit = StaticObject(
         id="door_exit",
-        rect=Rect(80, 200, 120, 260),
+        rect=Rect(60, 80, 120, 200),
         solid=False,
         interactable=True,
         next_scene_factory=scene9,
@@ -660,7 +660,7 @@ def scene11() -> Scene:
     book = StaticObject(
         id="book",
         name="Китап",
-        rect=Rect(60, 180, 92, 212),
+        rect=Rect(300, 170, 340, 210),
         solid=False,
         interactable=True,
         next_scene_factory=scene12,
@@ -678,7 +678,7 @@ def scene11() -> Scene:
     )
     samovar = StaticObject(
         id="samovar",
-        rect=Rect(360, 200, 392, 232),
+        rect=Rect(60, 200, 92, 232),
         solid=False,
         interactable=False,
         texture_path="sprites/bahtiyar/down0.png",
@@ -746,20 +746,12 @@ def scene13() -> Scene:
     )
     door_exit = StaticObject(
         id="door_exit",
-        rect=Rect(80, 200, 120, 260),
+        rect=Rect(60, 80, 120, 200),
         solid=False,
         interactable=True,
         next_scene_factory=scene15,
         texture_path=None,
         z=-1,
-    )
-    book = StaticObject(
-        id="book",
-        rect=Rect(60, 180, 92, 212),
-        solid=False,
-        interactable=False,
-        texture_path="sprites/bahtiyar/down0.png",
-        z=1,
     )
     ebi = StaticObject(
         id="ebi",
@@ -773,7 +765,7 @@ def scene13() -> Scene:
     )
     samovar = StaticObject(
         id="samovar",
-        rect=Rect(360, 200, 392, 232),
+        rect=Rect(60, 200, 92, 232),
         solid=False,
         interactable=False,
         texture_path="sprites/bahtiyar/down0.png",
@@ -781,7 +773,7 @@ def scene13() -> Scene:
     )
     return Scene(
         id="scene13",
-        objects=[background, door_exit, book, ebi, samovar],
+        objects=[background, door_exit, ebi, samovar],
         player_pos=(230, 220),
         player_size=(70, 70),
         interact_distance=28.0,
@@ -828,7 +820,7 @@ def scene14() -> Scene:
 
 
 def scene15() -> Scene:
-    """Yard scene with bucket at the well."""
+    """Yard scene with bucket near the grandfather."""
     background = StaticObject(
         id="bg",
         rect=Rect(0, 0, 496, 279),
@@ -865,7 +857,7 @@ def scene15() -> Scene:
     bucket = StaticObject(
         id="bucket",
         name="Су",
-        rect=Rect(60, 200, 92, 232),
+        rect=Rect(392, 212, 424, 244),
         solid=False,
         interactable=True,
         next_scene_factory=scene16,
@@ -951,20 +943,12 @@ def scene17() -> Scene:
     )
     door_exit = StaticObject(
         id="door_exit",
-        rect=Rect(80, 200, 120, 260),
+        rect=Rect(60, 80, 120, 200),
         solid=False,
         interactable=True,
         next_scene_factory=scene15,
         texture_path=None,
         z=-1,
-    )
-    book = StaticObject(
-        id="book",
-        rect=Rect(60, 180, 92, 212),
-        solid=False,
-        interactable=False,
-        texture_path="sprites/bahtiyar/down0.png",
-        z=1,
     )
     bucket = StaticObject(
         id="bucket",
@@ -986,7 +970,7 @@ def scene17() -> Scene:
     )
     samovar = StaticObject(
         id="samovar",
-        rect=Rect(360, 200, 392, 232),
+        rect=Rect(60, 200, 92, 232),
         solid=False,
         interactable=False,
         texture_path="sprites/bahtiyar/down0.png",
@@ -994,7 +978,7 @@ def scene17() -> Scene:
     )
     return Scene(
         id="scene17",
-        objects=[background, door_exit, book, bucket, ebi, samovar],
+        objects=[background, door_exit, bucket, ebi, samovar],
         player_pos=(230, 220),
         player_size=(70, 70),
         interact_distance=28.0,
@@ -1017,7 +1001,7 @@ def scene18() -> Scene:
     )
     samovar = StaticObject(
         id="samovar",
-        rect=Rect(360, 200, 392, 232),
+        rect=Rect(60, 200, 92, 232),
         solid=False,
         interactable=False,
         texture_path="sprites/bahtiyar/down0.png",
