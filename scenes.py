@@ -51,7 +51,7 @@ def make_house_scene(
     ebi = StaticObject(
         id="ebi",
         name="Әби",
-        rect=Rect(160, 212, 192, 260),
+        rect=Rect(158, 208, 194, 264),
         solid=False,
         interactable=highlight,
         next_scene_factory=next_scene_factory,
@@ -109,7 +109,7 @@ def scene1() -> Scene:
     )
     door = StaticObject(
         id="door",
-        rect=Rect(80, 180, 100, 220),
+        rect=Rect(85, 35, 220, 160),
         solid=False,
         interactable=True,
         next_scene_factory=lambda: scene1_house(),
@@ -119,7 +119,7 @@ def scene1() -> Scene:
     flower = StaticObject(
         id="flower",
         name="Чәчәк",
-        rect=Rect(236, 210, 260, 238),
+        rect=Rect(238, 212, 258, 236),
         solid=False,
         interactable=False,
         texture_path="sprites/objects/flower.png",
@@ -166,7 +166,7 @@ def scene2() -> Scene:
     )
     flower = StaticObject(
         id="flower",
-        rect=Rect(236, 210, 260, 238),
+        rect=Rect(238, 212, 258, 236),
         solid=False,
         interactable=False,
         texture_path="sprites/objects/flower.png",
@@ -235,7 +235,7 @@ def scene3() -> Scene:
     )
     door = StaticObject(
         id="door",
-        rect=Rect(80, 180, 100, 220),
+        rect=Rect(85, 35, 220, 160),
         solid=False,
         interactable=True,
         next_scene_factory=lambda: scene3_house(),
@@ -244,7 +244,7 @@ def scene3() -> Scene:
     )
     flower = StaticObject(
         id="flower",
-        rect=Rect(236, 210, 260, 238),
+        rect=Rect(238, 212, 258, 236),
         solid=False,
         interactable=False,
         texture_path="sprites/objects/flower.png",
@@ -276,7 +276,7 @@ def scene4() -> Scene:
     ebi_big = NPC(
         id="ebi_big",
         name="Әби",
-        rect=Rect(40, 212, 72, 260),
+        rect=Rect(38, 208, 74, 264),
         solid=False,
         interactable=True,
         dialog_lines=["Исәнмесез, бир миңа чәчәк"],
@@ -336,7 +336,7 @@ def scene5() -> Scene:
     )
     door = StaticObject(
         id="door",
-        rect=Rect(80, 180, 100, 220),
+        rect=Rect(85, 35, 220, 160),
         solid=False,
         interactable=True,
         next_scene_factory=lambda: scene5_house(),
@@ -346,7 +346,7 @@ def scene5() -> Scene:
     flower = StaticObject(
         id="flower",
         name="Чәчәк",
-        rect=Rect(236, 210, 260, 238),
+        rect=Rect(238, 212, 258, 236),
         solid=False,
         interactable=True,
         next_scene_factory=scene6,
@@ -403,7 +403,7 @@ def scene6() -> Scene:
     flower_big = NPC(
         id="flower_big",
         name="Чәчәк",
-        rect=Rect(236, 210, 260, 238),
+        rect=Rect(238, 212, 258, 236),
         solid=False,
         interactable=True,
         dialog_lines=["Чәчәк"],
@@ -463,7 +463,7 @@ def scene7() -> Scene:
     )
     door = StaticObject(
         id="door",
-        rect=Rect(80, 180, 100, 220),
+        rect=Rect(85, 35, 220, 160),
         solid=False,
         interactable=True,
         next_scene_factory=lambda: scene7_house(),
@@ -472,7 +472,7 @@ def scene7() -> Scene:
     )
     flower = StaticObject(
         id="flower",
-        rect=Rect(236, 210, 260, 238),
+        rect=Rect(238, 212, 258, 236),
         solid=False,
         interactable=False,
         texture_path="sprites/objects/flower.png",
@@ -504,7 +504,7 @@ def scene8() -> Scene:
     ebi_big = NPC(
         id="ebi_big_final",
         name="Әби",
-        rect=Rect(40, 212, 72, 260),
+        rect=Rect(38, 208, 74, 264),
         solid=False,
         interactable=True,
         dialog_lines=["Рәхмәт"],
@@ -563,7 +563,7 @@ def scene9() -> Scene:
     )
     door = StaticObject(
         id="door",
-        rect=Rect(80, 180, 100, 220),
+        rect=Rect(85, 35, 220, 160),
         solid=False,
         interactable=True,
         next_scene_factory=lambda: scene9_house(),
@@ -572,7 +572,7 @@ def scene9() -> Scene:
     )
     flower = StaticObject(
         id="flower",
-        rect=Rect(236, 210, 260, 238),
+        rect=Rect(238, 212, 258, 236),
         solid=False,
         interactable=False,
         texture_path="sprites/objects/flower.png",
