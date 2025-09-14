@@ -15,7 +15,29 @@ placeholder image to the player's inventory.
 """
 
 from scene import Scene, StaticObject, NPC, Rect, SceneFactory
-from typing import Optional
+from typing import Optional, List
+
+
+def house_bases() -> List[StaticObject]:
+    """Create invisible solid bases for houses."""
+    return [
+        StaticObject(
+            id="house1_base",
+            rect=Rect(85, 150, 220, 160),
+            solid=True,
+            interactable=False,
+            texture_path=None,
+            z=0,
+        ),
+        StaticObject(
+            id="house2_base",
+            rect=Rect(330, 230, 475, 240),
+            solid=True,
+            interactable=False,
+            texture_path=None,
+            z=0,
+        ),
+    ]
 
 
 def make_house_scene(
@@ -97,6 +119,7 @@ def scene1() -> Scene:
         texture_path="sprites/objects/house2.png",
         z=1,
     )
+    base1, base2 = house_bases()
     babay = StaticObject(
         id="babay",
         name="Бабай",
@@ -127,7 +150,7 @@ def scene1() -> Scene:
     )
     return Scene(
         id="scene1",
-        objects=[background, house1, house2, door, babay, flower],
+        objects=[background, house1, house2, base1, base2, door, babay, flower],
         player_pos=(230, 220),
         player_size=(35, 35),
         interact_distance=28.0,
@@ -164,6 +187,7 @@ def scene2() -> Scene:
         texture_path="sprites/objects/house2.png",
         z=1,
     )
+    base1, base2 = house_bases()
     flower = StaticObject(
         id="flower",
         rect=Rect(238, 212, 258, 236),
@@ -189,7 +213,7 @@ def scene2() -> Scene:
     )
     scene = Scene(
         id="scene2",
-        objects=[background, house1, house2, flower, babay_big],
+        objects=[background, house1, house2, base1, base2, flower, babay_big],
         player_pos=(-100, -100),
         player_size=(35, 35),
         player_texture_path="sprites/bahtiyar/down0.png",
@@ -226,6 +250,7 @@ def scene3() -> Scene:
         texture_path="sprites/objects/house2.png",
         z=1,
     )
+    base1, base2 = house_bases()
     babay = StaticObject(
         id="babay",
         rect=Rect(368, 220, 390, 255),
@@ -253,7 +278,7 @@ def scene3() -> Scene:
     )
     return Scene(
         id="scene3",
-        objects=[background, house1, house2, door, babay, flower],
+        objects=[background, house1, house2, base1, base2, door, babay, flower],
         player_pos=(230, 220),
         player_size=(35, 35),
         interact_distance=28.0,
@@ -329,6 +354,7 @@ def scene5() -> Scene:
         texture_path="sprites/objects/house2.png",
         z=1,
     )
+    base1, base2 = house_bases()
     babay = StaticObject(
         id="babay",
         rect=Rect(368, 220, 390, 255),
@@ -358,7 +384,7 @@ def scene5() -> Scene:
     )
     return Scene(
         id="scene5",
-        objects=[background, house1, house2, door, babay, flower],
+        objects=[background, house1, house2, base1, base2, door, babay, flower],
         player_pos=(230, 220),
         player_size=(35, 35),
         interact_distance=28.0,
@@ -395,6 +421,7 @@ def scene6() -> Scene:
         texture_path="sprites/objects/house2.png",
         z=1,
     )
+    base1, base2 = house_bases()
     babay = StaticObject(
         id="babay",
         rect=Rect(368, 220, 390, 255),
@@ -419,7 +446,7 @@ def scene6() -> Scene:
     )
     scene = Scene(
         id="scene6",
-        objects=[background, house1, house2, babay, flower_big],
+        objects=[background, house1, house2, base1, base2, babay, flower_big],
         player_pos=(-100, -100),
         player_size=(35, 35),
         player_texture_path="sprites/bahtiyar/down0.png",
@@ -456,6 +483,7 @@ def scene7() -> Scene:
         texture_path="sprites/objects/house2.png",
         z=1,
     )
+    base1, base2 = house_bases()
     babay = StaticObject(
         id="babay",
         rect=Rect(368, 220, 390, 255),
@@ -475,7 +503,7 @@ def scene7() -> Scene:
     )
     return Scene(
         id="scene7",
-        objects=[background, house1, house2, door, babay],
+        objects=[background, house1, house2, base1, base2, door, babay],
         player_pos=(230, 220),
         player_size=(35, 35),
         interact_distance=28.0,
@@ -549,6 +577,7 @@ def scene9() -> Scene:
         texture_path="sprites/objects/house2.png",
         z=1,
     )
+    base1, base2 = house_bases()
     babay = StaticObject(
         id="babay",
         rect=Rect(368, 220, 390, 255),
@@ -568,7 +597,7 @@ def scene9() -> Scene:
     )
     return Scene(
         id="scene9",
-        objects=[background, house1, house2, door, babay],
+        objects=[background, house1, house2, base1, base2, door, babay],
         player_pos=(230, 220),
         player_size=(35, 35),
         interact_distance=28.0,

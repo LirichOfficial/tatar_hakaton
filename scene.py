@@ -345,7 +345,10 @@ class Scene:
                 next_scene.return_pos = self.return_pos
             else:
                 if "house" not in next_scene.id:
-                    next_scene.player_pos = self.player_pos
+                    if "house" in self.id and self.return_pos is not None:
+                        next_scene.player_pos = self.return_pos
+                    else:
+                        next_scene.player_pos = self.player_pos
                 if self.return_pos is not None:
                     next_scene.return_pos = self.return_pos
                 else:
