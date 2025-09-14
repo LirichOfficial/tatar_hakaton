@@ -165,6 +165,17 @@ class StaticObject(GameObject):
     pass
 
 
+@dataclass
+class Door(StaticObject):
+    """Перемещает игрока в другую сцену и запоминает точку выхода."""
+    spawn_outside: Vec2 = (0.0, 0.0)
+
+    def on_interact(self, scene: "Scene") -> Optional["Scene"]:
+        # При входе в дом запоминаем позицию, куда нужно выйти наружу.
+        scene.return_pos = self.spawn_outside
+        return super().on_interact(scene)
+
+
 # ==========================
 # Сцена
 # ==========================

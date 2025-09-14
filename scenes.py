@@ -14,7 +14,7 @@ Interacting with a highlighted object adds the corresponding word and
 placeholder image to the player's inventory.
 """
 
-from scene import Scene, StaticObject, NPC, Rect, SceneFactory
+from scene import Scene, StaticObject, NPC, Rect, SceneFactory, Door
 from typing import Optional, List
 
 
@@ -23,7 +23,7 @@ def house_bases() -> List[StaticObject]:
     return [
         StaticObject(
             id="house1_base",
-            rect=Rect(85, 150, 220, 160),
+            rect=Rect(95, 145, 210, 160),
             solid=True,
             interactable=False,
             texture_path=None,
@@ -31,7 +31,7 @@ def house_bases() -> List[StaticObject]:
         ),
         StaticObject(
             id="house2_base",
-            rect=Rect(330, 230, 475, 240),
+            rect=Rect(340, 225, 465, 240),
             solid=True,
             interactable=False,
             texture_path=None,
@@ -83,7 +83,7 @@ def make_house_scene(
     return Scene(
         id=id,
         objects=[background, door, ebi],
-        player_pos=(230, 220),
+        player_pos=(248, 150),
         player_size=(100, 100),
         interact_distance=28.0,
         player_texture_path="sprites/bahtiyar/down0.png",
@@ -130,7 +130,7 @@ def scene1() -> Scene:
         texture_path="sprites/objects/grandpa_highlited.png",
         z=1,
     )
-    door = StaticObject(
+    door = Door(
         id="door",
         rect=Rect(85, 35, 220, 160),
         solid=False,
@@ -138,6 +138,7 @@ def scene1() -> Scene:
         next_scene_factory=lambda: scene1_house(),
         texture_path=None,
         z=1,
+        spawn_outside=(152, 165),
     )
     flower = StaticObject(
         id="flower",
@@ -259,7 +260,7 @@ def scene3() -> Scene:
         texture_path="sprites/objects/grandpa.png",
         z=1,
     )
-    door = StaticObject(
+    door = Door(
         id="door",
         rect=Rect(85, 35, 220, 160),
         solid=False,
@@ -267,6 +268,7 @@ def scene3() -> Scene:
         next_scene_factory=lambda: scene3_house(),
         texture_path=None,
         z=1,
+        spawn_outside=(152, 165),
     )
     flower = StaticObject(
         id="flower",
@@ -363,7 +365,7 @@ def scene5() -> Scene:
         texture_path="sprites/objects/grandpa.png",
         z=1,
     )
-    door = StaticObject(
+    door = Door(
         id="door",
         rect=Rect(85, 35, 220, 160),
         solid=False,
@@ -371,6 +373,7 @@ def scene5() -> Scene:
         next_scene_factory=lambda: scene5_house(),
         texture_path=None,
         z=1,
+        spawn_outside=(152, 165),
     )
     flower = StaticObject(
         id="flower",
@@ -492,7 +495,7 @@ def scene7() -> Scene:
         texture_path="sprites/objects/grandpa.png",
         z=1,
     )
-    door = StaticObject(
+    door = Door(
         id="door",
         rect=Rect(85, 35, 220, 160),
         solid=False,
@@ -500,6 +503,7 @@ def scene7() -> Scene:
         next_scene_factory=lambda: scene7_house(),
         texture_path=None,
         z=1,
+        spawn_outside=(152, 165),
     )
     return Scene(
         id="scene7",
@@ -586,7 +590,7 @@ def scene9() -> Scene:
         texture_path="sprites/objects/grandpa.png",
         z=1,
     )
-    door = StaticObject(
+    door = Door(
         id="door",
         rect=Rect(85, 35, 220, 160),
         solid=False,
@@ -594,6 +598,7 @@ def scene9() -> Scene:
         next_scene_factory=lambda: scene9_house(),
         texture_path=None,
         z=1,
+        spawn_outside=(152, 165),
     )
     return Scene(
         id="scene9",
