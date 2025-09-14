@@ -117,6 +117,13 @@ class GameObject:
             return self.next_scene_factory()
         return None
 
+@dataclass
+class ClickableObject(GameObject):
+    inventory_texture_path: str = None
+    translation: str = None
+    texture_path: str = "sprites/system/empty.png"
+    voice_path: str = None
+
 
 @dataclass
 class NPC(GameObject):
@@ -165,17 +172,6 @@ class StaticObject(GameObject):
     pass
 
 
-@dataclass
-class Door(StaticObject):
-    """Перемещает игрока в другую сцену и запоминает точку выхода."""
-    spawn_outside: Vec2 = (0.0, 0.0)
-
-    def on_interact(self, scene: "Scene") -> Optional["Scene"]:
-        # При входе в дом запоминаем позицию, куда нужно выйти наружу.
-        scene.return_pos = self.spawn_outside
-        return super().on_interact(scene)
-
-
 # ==========================
 # Сцена
 # ==========================
@@ -194,6 +190,7 @@ class Scene:
     player_speed: int = 5
     # Путь к текстуре игрока:
     player_texture_path: Optional[str] = None
+    clickable_objects: Optional[List[ClickableObject]] = None
     # Масштабировать ли текстуру игрока под размер хитбокса:
     scale_player_texture_to_rect: bool = True
     # Порядок отрисовки игрока:
@@ -356,10 +353,7 @@ class Scene:
                 next_scene.return_pos = self.return_pos
             else:
                 if "house" not in next_scene.id:
-                    if "house" in self.id and self.return_pos is not None:
-                        next_scene.player_pos = self.return_pos
-                    else:
-                        next_scene.player_pos = self.player_pos
+                    next_scene.player_pos = self.player_pos
                 if self.return_pos is not None:
                     next_scene.return_pos = self.return_pos
                 else:
@@ -399,6 +393,19 @@ class Scene:
         else:
             # После закрытия обновляем подсказку
             self._update_hint()
+
+    # ---------- Обработка клика -------
+
+    def process_click(self, x: int, y: int) -> tuple[Optional[str], Optional[str]]:
+        if not self.clickable_objects:
+            return None, None
+        for obj in self.clickable_objects:
+            if obj.rect.x1 <= x <= obj.rect.x2:
+                if obj.rect.y1 <= y <= obj.rect.y2:
+                    self.add_element((obj.translation, obj.inventory_texture_path))
+                    self.clickable_objects.remove(obj)
+                    return obj.translation, obj.voice_path
+        return None, None
 
     # ---------- Данные для рендера (включая пути к текстурам) ----------
 
